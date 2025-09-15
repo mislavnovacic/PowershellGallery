@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 # 1) Download your PSADT bundle
-$ZipUrl  = 'https://avdmgmdeployapps.blob.core.windows.net/deployapps?sp=r&st=2025-09-15T14:16:00Z&se=2099-09-15T22:31:00Z&spr=https&sv=2024-11-04&sr=c&sig=KmqjqZ8F9n0GLfDJOQCJmz0vYg51iK1uwmVeuYOpv70%3D'
+$ZipUrl  = 'https://avdmgmdeployapps.blob.core.windows.net/deployapps/7Zip.zip?sp=r&st=2025-09-15T14:16:00Z&se=2099-09-15T22:31:00Z&spr=https&sv=2024-11-04&sr=c&sig=KmqjqZ8F9n0GLfDJOQCJmz0vYg51iK1uwmVeuYOpv70%3D'
 $Stage   = 'C:\AIB\Stage\7zip'
 $ZipPath = Join-Path $Stage '7Zip_PSADT.zip'
 New-Item -Path $Stage -ItemType Directory -Force | Out-Null
