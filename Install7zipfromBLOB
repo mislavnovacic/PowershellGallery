@@ -8,27 +8,29 @@ $Stage   = 'C:\AIB\Stage\7zip'
 $ZipPath = Join-Path $Stage '7Zip_PSADT.zip'
 New-Item -Path $Stage -ItemType Directory -Force | Out-Null
 
-# Sanity: make sure this looks like a blob SAS with read
-if ($ZipUrl -notmatch '\?sv=.*\bsr=b\b' -or $ZipUrl -notmatch '\bsp=.*\br\b') {
-  throw "ZipUrl must be a **blob** SAS with **read** permission (sr=b, sp=r)."
+# Sanity (order-agnostic; don't fail on &sv=...)
+if ($ZipUrl -notmatch '(?:\?|&)sr=b(?:&|$)' -or
+    $ZipUrl -notmatch '(?:\?|&)sp=r(?:&|$)' -or
+    $ZipUrl -notmatch '(?:\?|&)sv=[^&]+')
+{
+  throw "ZipUrl must be a blob SAS with read permission (sr=b, sp=r) and include sv=."
 }
-# HEAD first so we fail fast on bad SAS
+
+# HEAD first so we fail fast on a bad token
 Invoke-WebRequest -Uri $ZipUrl -Method Head -UseBasicParsing | Out-Null
 
-# Download
+# Download + unzip
 Invoke-WebRequest -Uri $ZipUrl -OutFile $ZipPath -UseBasicParsing
-
-# 2) Expand bundle
 Expand-Archive -LiteralPath $ZipPath -DestinationPath $Stage -Force
 
-# 3) Locate Deploy-Application.ps1 (works even if ZIP created an extra folder)
+# Find PSADT entry point even if the zip adds a folder
 $deploy = Get-ChildItem -Path $Stage -Filter 'Deploy-Application.ps1' -Recurse -File | Select-Object -First 1
 if (-not $deploy) { throw "Deploy-Application.ps1 not found under $Stage" }
 
-# 4) Run PSADT silently and surface its exit code
+# Run PSADT and bubble up its exit code
 $argList = @('-NoLogo','-NoProfile','-ExecutionPolicy','Bypass','-File', $deploy.FullName, '-DeploymentType','Install','-DeployMode','NonInteractive')
 $proc = Start-Process -FilePath 'powershell.exe' -ArgumentList $argList -Wait -PassThru
 if ($proc.ExitCode -ne 0) { throw "PSADT failed with exit code $($proc.ExitCode)." }
 
-# 5) Optional cleanup (comment out if you want logs/artifacts for troubleshooting)
+# Cleanup
 Remove-Item $Stage -Recurse -Force
