@@ -23,8 +23,8 @@ param(
   [ValidateNotNullOrEmpty()]
   [string[]]$SasUrls = @(
     "https://avdmgmdeployapps.blob.core.windows.net/deployapps/Notepadplusplus.zip?sp=r&st=2025-10-02T20:02:14Z&se=2030-10-03T04:17:14Z&spr=https&sv=2024-11-04&sr=b&sig=m3PYnVS0HBuv2mpZDbF6rstThvxPtPG3wL4ietP2zJI%3D",
-    "https://avdmgmdeployapps.blob.core.windows.net/deployapps/Treesizepro_5.4.2.zip?sp=r&st=2025-10-02T20:02:43Z&se=2030-10-03T04:17:43Z&spr=https&sv=2024-11-04&sr=b&sig=MgdFa7b1MfH3ZMrmSTWw7Idmbj8YQ0xfCII84SXkzqI%3D"
-    "https://avdmgmdeployapps.blob.core.windows.net/deployapps/7Zip.zip?sp=r&st=2025-10-02T20:04:16Z&se=2030-10-03T04:19:16Z&spr=https&sv=2024-11-04&sr=b&sig=4scUq5nzoLfXsdzQvG%2F9kRE%2Fvwf%2Fi7GJLLAE0Y5kKGU%3D"
+  #  "https://avdmgmdeployapps.blob.core.windows.net/deployapps/Treesizepro_5.4.2.zip?sp=r&st=2025-10-02T20:02:43Z&se=2030-10-03T04:17:43Z&spr=https&sv=2024-11-04&sr=b&sig=MgdFa7b1MfH3ZMrmSTWw7Idmbj8YQ0xfCII84SXkzqI%3D"
+  #  "https://avdmgmdeployapps.blob.core.windows.net/deployapps/7Zip.zip?sp=r&st=2025-10-02T20:04:16Z&se=2030-10-03T04:19:16Z&spr=https&sv=2024-11-04&sr=b&sig=4scUq5nzoLfXsdzQvG%2F9kRE%2Fvwf%2Fi7GJLLAE0Y5kKGU%3D"
   ),
 
   [Parameter(Mandatory = $false)]
