@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 # 1) Download your PSADT bundle
-$ZipUrl  = 'https://avdmgmdeployapps.blob.core.windows.net/deployapps/7Zip_direct.zip?sp=r&st=2025-09-29T08:25:07Z&se=2030-09-29T16:40:07Z&spr=https&sv=2024-11-04&sr=b&sig=PeB1gZ47g2NF%2B7F%2BB9UyCVYA0C%2B%2BW4tUUBNoYOk9d3U%3D'
+$ZipUrl  = 'https://avdmgmdeployapps.blob.core.windows.net/deployapps/7Zip.zip?sp=r&st=2025-10-03T06:34:11Z&se=2030-10-03T14:49:11Z&spr=https&sv=2024-11-04&sr=b&sig=HwWKhi7eFydYsStsle7QmS1J3xEkygYiETaEaO8QGok%3D'
 $Stage   = 'C:\AIB\Stage\7zip'
 $ZipPath = Join-Path $Stage '7Zip_PSADT.zip'
 New-Item -Path $Stage -ItemType Directory -Force | Out-Null
