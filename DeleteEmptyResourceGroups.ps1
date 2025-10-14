@@ -3,7 +3,7 @@
 Connect-AzAccount
 
 # Get all resource groups with the specified prefix
-$prefix = "rg-avd-weu-shared"
+$prefix = "RG-AVD-WEU-POC"
 $resourceGroups = Get-AzResourceGroup | Where-Object { $_.ResourceGroupName -like "$prefix*" }
 
 foreach ($rg in $resourceGroups) {
